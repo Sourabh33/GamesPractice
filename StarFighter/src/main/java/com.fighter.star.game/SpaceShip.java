@@ -24,7 +24,9 @@ public class SpaceShip extends MovingObject {
         speed = s;
 
         try {
-            image = ImageIO.read(new File("E:\\Java Programs\\GamesPractice\\StarFighter\\src\\main\\resources\\ship.jpg"));
+            URL resource = getClass().getResource("/ship2.png");
+            System.out.println("imageName: "+ resource.getFile());
+            image = ImageIO.read(resource);
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }

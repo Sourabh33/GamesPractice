@@ -7,7 +7,9 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
-import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import static com.fighter.star.game.GameConstant.*;
 
@@ -16,8 +18,8 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable {
     private Alien alienOne;
     private Alien alienTwo;
 
-    private ArrayList<Alien> aliens;
-    private ArrayList<Ammo> ammoShots;
+    private List<Alien> aliens;
+    private List<Ammo> ammoShots;
 
     private boolean[] keys;
     private BufferedImage back;
@@ -31,13 +33,13 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable {
         keys = new boolean[5];
 
         spaceShip = new SpaceShip(400, 450, 5);
-        aliens = new ArrayList<>();
+        aliens = new CopyOnWriteArrayList<>();
         aliens.add(new Alien(250, 50, 2));
         aliens.add(new Alien(450, 50, 2));
         aliens.add(new Alien(650, 50, 2));
         aliens.add(new Alien(850, 50, 2));
 
-        ammoShots = new ArrayList<>();
+        ammoShots = new CopyOnWriteArrayList<>();
         this.addKeyListener(this);
         new Thread(this).start();
 
@@ -98,12 +100,19 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable {
             }
             a.move(DIR_RIGHT);
 
-            for (Ammo s : ammoShots) {
+            for(Iterator<Ammo> ammo = ammoShots.iterator(); ammo.hasNext();) {
+                Ammo s = ammo.next();
                 if (a.getX() >= s.getX() && a.getX() <= s.getX() + 100 && a.getY() >= s.getY() && a.getY() <= s.getY() + 80) {
                     aliens.remove(a);
                     ammoShots.remove(s);
                 }
             }
+//            for (Ammo s : ammoShots) {
+//                if (a.getX() >= s.getX() && a.getX() <= s.getX() + 100 && a.getY() >= s.getY() && a.getY() <= s.getY() + 80) {
+//                    aliens.remove(a);
+//                    ammoShots.remove(s);
+//                }
+//            }
         }
 
         for (Ammo s : ammoShots) {

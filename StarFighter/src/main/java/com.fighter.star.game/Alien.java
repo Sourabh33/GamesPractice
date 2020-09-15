@@ -3,6 +3,7 @@ package com.fighter.star.game;
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.io.File;
+import java.net.URL;
 
 public class Alien extends MovingObject {
 
@@ -21,7 +22,9 @@ public class Alien extends MovingObject {
         super(x, y);
         speed = s;
         try {
-            image = ImageIO.read(new File("E:\\Java Programs\\GamesPractice\\StarFighter\\src\\main\\resources\\alien.jpg"));
+            URL resource = getClass().getResource("/alien.jpg");
+            System.out.println("imageName: "+ resource.getFile());
+            image = ImageIO.read(resource);
         } catch (Exception e) {
 
         }
