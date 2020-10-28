@@ -1,5 +1,5 @@
 # GamesPractice
-A collection of games in Java and Javacript
+A collection of games in Java and Javascript
 
 - Snake Game
 - Sudoku Game
