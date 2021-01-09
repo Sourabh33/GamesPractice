@@ -10,7 +10,7 @@ public class Snake extends JFrame implements ActionListener {
 	JButton restartButton;
 
 	public Snake() {
-		restartButton = new JButton("restart");
+		restartButton = new JButton("Restart");
 		restartButton.setVisible(false);
 		restartButton.addActionListener(this);
 		initUi(restartButton);
